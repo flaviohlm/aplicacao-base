@@ -1,0 +1,117 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/index.xhtml">
+
+    <ui:define name="meta">
+        <f:metadata>
+            <f:viewParam name="id" value="#{menuBean.idElemento}" />
+            <f:viewAction action="#{menuBean.loadModel}" />
+        </f:metadata>            
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="breadCrumb">
+            <p:breadCrumb>
+                <p:menuitem value="Home" url="/index.xhtml"/>
+                <p:menuitem value="Gerenciar Menus" url="../index.xhtml"/>
+                <p:menuitem value="Cadastro de Menu" url=""/>
+            </p:breadCrumb>
+        </h:form>
+
+        <h:form id="form_1">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+                        <h1>Cadastro de Menu</h1>    
+                        <p:messages id="messages"  autoUpdate="true" closable="true" />
+
+                        <div class="ui-g">
+
+                            <h:panelGroup class="ui-g-12 ui-fluid" layout="block" >
+                                <p:fieldset legend="Dados do Menu" >
+                                    <h:panelGroup class="ui-g-12 ui-md-12 ui-lg-6" layout="block" >
+                                        <p:panelGrid layout="grid" columns="2" >
+                                            <h:panelGroup styleClass="md-inputfield">
+                                                <p:inputText id="descricao" size="25" value="#{menuBean.menu.descricao}" 
+                                                             required="true" requiredMessage="Campo 'Descrição' obrigatório."/>
+                                                <p:outputLabel value="Descrição" for="descricao"/>
+                                            </h:panelGroup>
+
+                                            <h:panelGroup styleClass="md-inputfield">
+                                                <p:inputText id="icone" size="5" value="#{menuBean.menu.icone}" />
+                                                <p:outputLabel value="Ícone" for="icone"/>
+                                            </h:panelGroup>
+
+                                            <h:panelGroup styleClass="md-inputfield">
+                                                <p:spinner id="nivel" min="0" max="3" size="5" value="#{menuBean.menu.nivel}">   
+                                                    <p:ajax listener="#{menuBean.getListaMenus()}" update="menuPai" process="@this" />
+                                                </p:spinner>
+                                                <p:outputLabel value="Nível" for="nivel"/>
+                                            </h:panelGroup>
+
+                                            <h:panelGroup styleClass="md-inputfield">
+                                                <p:spinner id="ordem" min="0" max="50" size="5" value="#{menuBean.menu.ordem}" />  
+                                                <p:outputLabel value="Ordem" for="ordem"/>
+                                            </h:panelGroup>                                                                            
+                                        </p:panelGrid>
+                                        <p:panelGrid layout="grid" columns="1" >
+                                            <h:panelGroup styleClass="md-inputfield">
+                                                <p:inputText id="url" size="30" value="#{menuBean.menu.url}" />
+                                                <p:outputLabel value="URL" for="url"/>
+                                            </h:panelGroup>
+
+                                        </p:panelGrid>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup class="ui-g-12 ui-md-12 ui-lg-6" layout="block" >
+                                        <p:panelGrid layout="grid" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-9">
+                                            <p:outputLabel value="Menu Pai" for="menuPai"/>                                                        
+                                            <p:selectOneMenu id="menuPai" value="#{menuBean.menu.pai}" converter="#{menuConverter}" 
+                                                             required="true" requiredMessage="Campo 'Menu Pai' obrigatório.">
+                                                <f:selectItem itemLabel="Selecione" itemValue="" />
+                                                <f:selectItems value="#{menuBean.listaMenus}" var="menu" itemLabel="#{menu.descricao}" itemValue="#{menu}"  />
+                                            </p:selectOneMenu>
+
+                                            <p:outputLabel value="Desativar" />
+                                            <p:selectBooleanCheckbox id="fl_excluido" value="#{menuBean.menu.excluido}"/>
+                                        </p:panelGrid>
+                                    </h:panelGroup>
+                                </p:fieldset>
+
+                                <br/>
+
+                                <p:dataTable id="dataTablePerfis" 
+                                             widgetVar="modelPerfil" 
+                                             emptyMessage="Nenhum registro encontrado." 
+                                             var="model" 
+                                             paginator="true" paginatorAlwaysVisible="false" rows="10"
+                                             value="#{menuBean.listaPerfil}" 
+                                             selection="#{menuBean.listaPerfilSelecionados}" 
+                                             rowIndexVar="rowIndex"
+                                             rowKey="#{model.id}" >
+
+                                    <p:column selectionMode="multiple" width="50" styleClass="centralizar"/>
+
+                                    <p:column sortBy="nome"  headerText="Nome" >
+                                        <h:outputText value="#{model.nome}" />   
+                                    </p:column>
+
+                                </p:dataTable>
+                            </h:panelGroup>
+
+                            <br/>
+
+                            <h:panelGroup layout="block" class="ui-g-12 actionDiv">
+                                <p:commandButton id="btnSalvar" update="form_1" value="Salvar" action="#{menuBean.salvar}"
+                                                 icon="ui-icon-save"/>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

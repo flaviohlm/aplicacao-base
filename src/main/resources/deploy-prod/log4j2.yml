@@ -1,0 +1,60 @@
+Configuration:
+  name: deploy-prod
+
+  Properties:
+    Property:
+    - name: log-path
+      value: ${sys:catalina.base}/logs/sgs
+    - name: archive
+      value: ${log-path}/archive
+    - name: applicacao
+      value: Sistema de Gestão de Seleção
+
+  Appenders:
+
+    # Configuração do log na console
+    Console:
+      name: Console-Appender
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: '%highlight{[%-5level]} [${applicacao}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1}:%L - %msg%n'
+
+    # Configuração do log em arquivo
+    RollingFile:
+      name: RollingFile-Appender
+      fileName: ${log-path}/rollingfile.log
+      filePattern: ${archive}/rollingfile-%d{yyyy-MM-dd}.log
+      PatternLayout:
+        pattern: '%highlight{[%-5level]} [${applicacao}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1}:%L - %msg%n'
+      Policies:
+        TimeBasedTriggeringPolicy:
+          interval: 1 # diário
+          modulate: true
+      DefaultRollOverStrategy:
+        max: 30 # Quantidade de arquivos de log para manter
+
+  Loggers:
+
+    # Logs gerais que não são do pacote do projeto (terceiros)
+    Root:
+      level: WARN # nível dos logs gerais
+      # Para onde enviar esses logs
+      Appender-ref:
+        ref: Console-Appender
+
+    # Logs das classes do projeto
+    Logger:
+      - name: br.gov.to.secad
+        additivity: 'false'
+        level: DEBUG # nível do log
+        # Para onde enviar esses logs
+        Appender-ref:
+          - ref: Console-Appender
+            level: ERROR # nível do log na console
+          - ref: RollingFile-Appender
+            level: WARN # nível do log em arquivo
+
+      # Hibernate
+      - name: org.hibernate
+        level: ERROR
+

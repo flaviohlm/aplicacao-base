@@ -1,0 +1,116 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/index.xhtml">
+
+    <ui:define name="meta">
+        <f:metadata>
+            <f:viewParam name="id" value="#{usuarioBean.idElemento}" />
+            <f:viewAction action="#{usuarioBean.loadModel}" />
+        </f:metadata>            
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <p:breadCrumb>
+                <p:menuitem value="Home" url="/index.xhtml"/>
+                <p:menuitem value="Gerenciar Usuários" url="../index.xhtml"/>
+                <p:menuitem value="Editar Usuário" url=""/>
+            </p:breadCrumb>
+        </h:form>
+
+        <h:form id="form_1">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+                        <h1>Editar Usuário</h1>    
+                        <p:messages id="messages"  autoUpdate="true" closable="true" />
+
+                        <div class="ui-g">
+
+                            <p:outputLabel value="Ativo " for="ativo"/>
+                                    <p:selectBooleanCheckbox id="ativo" value="#{notificacaoEmailController.objeto.ativo}" />
+                                    <br/><br/>
+                            
+                            <h:panelGroup class="ui-g-12" layout="block" rendered="#{usuarioBean.showDadosServidor}">
+                                <p:fieldset legend="Dados do Usuário" >
+                                    <h:panelGroup id="dadosServidor">
+                                        <p:panelGrid columns="4" layout="grid">
+                                            <p:outputLabel value="Nome " class="label-destaque">
+                                                <h:outputText class="texto" value="#{usuarioBean.usuario.pessoa.nome}" />                            
+                                            </p:outputLabel>
+
+                                            <p:outputLabel value="CPF " class="label-destaque">
+                                                <h:outputText class="texto" value="#{usuarioBean.usuario.pessoa.cpfFormatado}" />                            
+                                            </p:outputLabel>
+
+                                            <p:outputLabel value="Nº Funcional " class="label-destaque" >
+                                                <h:outputText class="texto" value="#{usuarioBean.usuario.pessoa.numFunc}-#{usuarioBean.usuario.pessoa.numVinc}" />                            
+                                            </p:outputLabel> 
+
+                                            <p:outputLabel value="Lotação " class="label-destaque" >
+                                                <h:outputText class="texto" value="#{usuarioBean.usuario.pessoa.lotacao}" />                            
+                                            </p:outputLabel>
+                                            <p:outputLabel value="E-mail " class="label-destaque" >
+                                                <h:outputText class="texto" value="#{usuarioBean.usuario.pessoa.email}" />                            
+                                            </p:outputLabel>
+                                        </p:panelGrid>
+                                    </h:panelGroup>
+                                </p:fieldset>
+
+                                <br/>
+
+                                <p:dataTable id="dataTablePerfis" widgetVar="modelPerfil" emptyMessage="Nenhum registro encontrado." var="model" paginator="true" paginatorAlwaysVisible="false" rows="10" value="#{usuarioBean.listaPerfis}" selection="#{usuarioBean.usuario.listaPerfis}" rowIndexVar="rowIndex" rowKey="#{model.id}" >
+
+                                    <p:ajax event="toggleSelect" listener="#{usuarioBean.selecionarPerfilListener}" update=":form_1" />
+                                    <p:ajax event="rowSelectCheckbox" listener="#{usuarioBean.selecionarPerfilListener}" update=":form_1" />
+                                    <p:ajax event="rowUnselectCheckbox" listener="#{usuarioBean.selecionarPerfilListener}" update=":form_1" />
+                                    <p:ajax event="rowSelect" listener="#{usuarioBean.selecionarPerfilListener}" update=":form_1" />
+                                    <p:ajax event="rowUnselect" listener="#{usuarioBean.selecionarPerfilListener}" update=":form_1" />
+
+                                    <p:column selectionMode="multiple" width="50" class="centralizar"/>
+
+                                    <p:column sortBy="nome"  headerText="Perfil" >
+                                        <h:outputText value="#{model.nome}" />   
+                                    </p:column>
+
+                                </p:dataTable>  
+                            </h:panelGroup>
+
+                            <h:panelGroup class="ui-g-12" layout="block" rendered="#{usuarioBean.showOrgaos}">
+                                <p:outputLabel id="orgao" value="Órgão(s):" class="label-destaque" >
+                                    <p:selectCheckboxMenu id="multiple" value="#{usuarioBean.usuario.listaOrgaos}" converter="#{orgaoConverter}" label="Órgão" multiple="true" filter="true" filterMatchMode="contains" panelStyle="width:300px">
+                                        <f:selectItems value="#{usuarioBean.listaOrgao}" var="orgao" itemLabel="#{orgao.nome}" itemValue="#{orgao}" />
+                                        <f:attribute name="collectionType" value="java.util.ArrayList" />
+                                    </p:selectCheckboxMenu>
+                                </p:outputLabel>
+                            </h:panelGroup>
+
+                            <p:panelGrid columns="1" layout="grid" id="quadros_unidade">
+                                <p:outputLabel value="Unidade de Ensino*: " class="label-destaque" rendered="#{usuarioBean.showUnidades}" >
+                                    <p:selectOneMenu value="#{usuarioBean.usuario.unidadeEnsino}" converter="#{unidadeEnsinoConverter}">
+                                        <f:selectItem itemLabel="Selecione" itemValue="" />
+                                        <f:selectItems value="#{usuarioBean.listaUnidadeEnsino}" var="unidade" itemLabel="#{unidade.sigla}" itemValue="#{unidade}" />
+                                        <p:ajax listener="#{usuarioBean.selecionarUnidadeListener}" update="quadros_unidade" />
+                                    </p:selectOneMenu>
+                                </p:outputLabel>
+
+                                <p:outputLabel  value="Quadros da Unidade de Ensino: " class="label-destaque" rendered="#{usuarioBean.showQuadros}" >
+                                    <h:outputLabel value="#{usuarioBean.usuario.unidadeEnsino.listaQuadroString}" class="label-normal" />
+                                </p:outputLabel>
+                            </p:panelGrid>
+
+                            <h:panelGroup layout="block" class="ui-g-12 actionDiv"  >
+                                <p:commandButton id="btnSalvar" update="form_1" value="Salvar" action="#{usuarioBean.atualizar}"
+                                                 rendered="#{usuarioBean.showDadosServidor}"
+                                                 disabled="#{usuarioBean.disableSave}" icon="ui-icon-save"/>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,25 @@
+Template Ultima:
+	- https://goo.gl/z3fjgN
+
+Estrutura do Menu:
+- Descrição: Título do Menu
+- Órdem: A órdem que o menu irá ser exibido
+
+- Pai:
+	- Nível: 1
+	- Menu Pai: null
+	- URL:
+		- Possuí filhos: /titulo
+		- Não possuí filhos: /titulo/index.xhtml
+
+- Filho Nível 2:
+	- Nível: 2
+	- Menu Pai: O menu pai de nível 1
+	- URL:
+		- Possuí filhos: titulo
+		- Não possuí filhos: titulo/index.xhtml
+
+- Filho Nível 3:
+	- Nível: 3
+		- Menu Pai: O menu filho de nível 2
+		- URL: titulo/index.xhtml

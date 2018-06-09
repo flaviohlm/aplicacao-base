@@ -1,0 +1,933 @@
+@charset "utf-8";
+/* CSS SECAD */
+
+/* Autofill Transparente */
+/*input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}*/
+
+/* Remove cor amarela do autofill do browser */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+body .md-inputfield .ui-inputfield:-webkit-autofill ~ label {
+  top: -20px;
+  font-size: 12px;
+}
+
+/* Filter de Cada Coluna */
+.ui-datatable .ui-column-filter {
+  display: none;
+}
+
+.centralizar {
+  text-align: center;
+}
+
+.center-image {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.negrito {
+  width: 100%;
+  display: block;
+  font-weight: bold;
+}
+
+.texto-negrito {
+  font-weight: bold;
+}
+
+.rolagem {
+  max-height: 500px;
+  border: 0 !important;
+}
+
+u.i-datatable .ui-widget .ui-datatable-reflow {
+  text-align: right !important;
+  background-color: #FF0000 !important;
+  border: 1px solid #2f4d8b !important;
+}
+
+/* Sorting DataTable */
+@media (max-width: 640px) {
+  .reflowTable .ui-reflow-label {
+	display: none !important;
+  }
+
+  .reflowTable .ui-reflow-dropdown {
+	display: none !important;
+  }
+}
+
+/* DataTable reflow header */
+@media (max-width: 640px) {
+  .reflowTable.ui-datatable-reflow .ui-datatable-data td[role="gridcell"] .ui-column-title {
+	font-weight: bold;
+	display: block !important;
+	text-align: center;
+	width: 100%;
+  }
+}
+
+/* DataTable reflow options menu */
+@media (max-width: 640px) {
+  .reflowTable.ui-datatable-reflow .ui-datatable-data td[role="gridcell"] {
+	display: block !important;
+	text-align: center;
+	width: 100%;
+  }
+}
+
+/* Mobile footer */
+@media (max-width: 35em) {
+  .footer-text-right {
+	float: left !important;
+  }
+}
+
+/* Logo div */
+.layout-wrapper .topbar .topbar-left {
+  padding: 10px !important;
+}
+
+/* Logo img */
+.topbar-logo .logo-img {
+  //Forçar tamanho, se a imagem for maior, irá distorcer
+  width: 230px;
+  height: 55px;
+}
+
+.login-logo {
+  width: 85%;
+}
+
+/* Para funcionar click no logo */
+.topbar-right {
+  position: initial !important;
+}
+
+.destaque {
+  width: 100%;
+  max-width: 700px;
+}
+
+/* Inputs no Login */
+.md-inputfield {
+  .senha_login ~ label {
+	//font-size:12px;
+	color: $primaryColor;
+	margin-top: -5px;
+  }
+
+  .cpf_login ~ label {
+	//font-size:12px;
+	color: $primaryColor;
+	margin-top: -5px;
+  }
+}
+
+.login-panel .ui-outputlabel-rfi {
+  display: none;
+}
+
+/* Corrigindo o icone nos botões quando for tamanho Material */
+.ui-button-icon-only .ui-icon {
+  margin-left: -12px !important;
+}
+
+body.layout-compact .ui-button.ui-button-icon-only .ui-icon {
+  margin-left: -10px !important;
+}
+
+/* Cards de cursos no index */
+.cursos-index {
+  min-height: 100%;
+}
+
+/* Pro icone no option menu quando for tamanho Material */
+body .ui-menu .ui-menu-list li.ui-menuitem .ui-menuitem-link {
+  padding: 10px 10px !important;
+}
+
+/* Datatable largura 800px, não deixar fazer scroll */
+@media (max-width: 800px) {
+  //Com isso, não funciona o rowExpanssion
+  .ui-datatable table {
+	//table-layout: fixed !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Setinha do perfil (mobile) */
+  .topbar .topbar-right .topbar-items .dropdown-arrow {
+	margin-right: auto !important;
+	margin-left: auto !important;
+	display: block !important;
+  }
+}
+
+/* Setinha do perfil (mobile) */
+.topbar .topbar-right .topbar-items .dropdown-arrow {
+  display: none;
+}
+
+body .ui-datatable tbody tr td .ui-row-toggler {
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
+
+@media (max-width: 35em) {
+  /* rowExpanssion no dataTable */
+  .ui-datatable .ui-datatable-data .ui-expanded-row-content td {
+	border: 0 !important;
+  }
+
+  .ui-datatable .ui-datatable-data .ui-expanded-row-content td {
+	padding: 4px !important;
+  }
+}
+
+/* Retirar borda no panelGrid*/
+.ui-panelgrid-content {
+  border: 0 none !important;
+  background: 0 !important;
+}
+
+/* Messages */
+.ui-messages-error-icon {
+  margin-top: -3px !important;
+}
+
+/* Messages */
+.ui-messages-close {
+  margin-top: -1px !important;
+}
+
+/* Datatable com Checkbox */
+.ui-datatable .ui-selection-column .ui-chkbox-all {
+  margin: 0 16px !important;
+}
+
+/* Datatable com Checkbox */
+.ui-datatable .ui-datatable-data td[role="gridcell"] .ui-chkbox {
+  margin-right: 0;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+/* Placeholder do cabeçalho do DataTable */
+.ui-datatable-header ::-webkit-input-placeholder {
+  color: $accentDarkColor;
+}
+
+.ui-datatable-header :-moz-placeholder {
+  color: $accentDarkColor;
+}
+
+.ui-datatable-header ::-moz-placeholder {
+  color: $accentDarkColor;
+}
+
+/* Botões de ações à direita */
+.action-button-group {
+  width: 100%;
+  text-align: right;
+}
+
+.action-button-group .ui-button {
+  margin-left: 0.5em;
+}
+
+.action-button-group .ui-splitbutton .ui-button {
+  margin-left: 0;
+}
+
+@media (max-width: 35em) {
+  .action-button-group .ui-button {
+	width: 100%;
+	margin-left: 0 !important;
+	margin-bottom: 0.5em;
+  }
+
+  .action-button-group-center .ui-button {
+	width: 100%;
+	margin-left: 0 !important;
+	margin-bottom: 0.5em;
+  }
+
+  .action-button-group-left .ui-button {
+	width: 100%;
+	margin-right: 0 !important;
+	margin-bottom: 0.5em;
+  }
+}
+
+/* Botões de ações à esquerda */
+.action-button-group-left {
+  width: 100%;
+  text-align: left;
+}
+
+.action-button-group-left .ui-button {
+  margin-right: 0.5em;
+}
+
+.action-button-group-left .ui-splitbutton .ui-button {
+  margin-right: 0;
+}
+
+/* Botões de ações centralizado */
+.action-button-group-center {
+  width: 100%;
+  text-align: center;
+}
+
+.action-button-group-center .ui-button {
+  margin-left: 0.5em;
+}
+
+/* Imagem perfil (temporária) */
+@media (max-width: 1024px) {
+  .layout-wrapper .layout-menu .profile {
+	display: none;
+  }
+
+  .layout-wrapper .layout-menu #profile-menu {
+	display: none !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .layout-wrapper .topbar-items > li > ul {
+	width: 350px;
+  }
+}
+
+/* Labels com ui-state-error */
+body .ui-state-error, body .ui-widget.ui-state-error, body .ui-widget-content .ui-state-error, body .ui-widget-header .ui-state-error {
+  color: #e62a10 !important;
+}
+
+@media (max-width: 35em) {
+  .layout-main {
+	padding: 85px 2px 15px 2px !important;
+  }
+}
+
+/* Não esconder o texto do botão de upload de arquivos no mobile */
+@media screen and (max-width: 40em) {
+  .ui-fileupload-buttonbar .ui-button .ui-button-text {
+	display: block;
+  }
+}
+
+/* Imagem do perfil no menu lateral */
+.perfil-foto-menu {
+  height: 90px;
+  border: 4px solid #fff;
+  box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, .15), 0px -5px 30px -6px rgba(0, 0, 0, 0.10);
+  border-radius: 49.9%;
+  -webkit-border-radius: 49.9%;
+  -moz-border-radius: 49.9%;
+}
+
+/* Imagem do perfil no cabeçalho (mobile) */
+.perfil-foto-topbar {
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 5px;
+  display: block;
+  vertical-align: middle;
+  height: 36px;
+  border-radius: 49.9%;
+  -webkit-border-radius: 49.9%;
+  -moz-border-radius: 49.9%;
+}
+
+@media (max-width: 1024px) {
+  .perfil-foto-topbar {
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 5px;
+	display: block;
+	vertical-align: middle;
+	height: 45px;
+	border: 2px solid #fff;
+	box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, .15), 0px -5px 30px -6px rgba(0, 0, 0, 0.10);
+	border-radius: 49.9%;
+	-webkit-border-radius: 49.9%;
+	-moz-border-radius: 49.9%;
+  }
+
+  .topbar-dados-perfil {
+	display: none !important;
+  }
+}
+
+.topbar-dados-perfil li {
+  padding: 10px 10px 0 10px;
+  background-color: #f3f3f3;
+}
+
+.layout-wrapper .topbar .topbar-right .topbar-items > li.active-top-menu > ul li a {
+  padding-left: 16px;
+}
+
+/* Correção no botão do p:calendar */
+.ui-datepicker .ui-datepicker-buttonpane button {
+  overflow: hidden;
+  background-color: $primaryColor;
+  color: #ffffff;
+  font-size: 14px;
+  height: 30px;
+  padding: 0 14px;
+  border: 0 none;
+  -moz-box-shadow: 0 1px 2.5px 0 rgba(0, 0, 0, 0.26), 0 1px 5px 0 rgba(0, 0, 0, 0.16);
+  -webkit-box-shadow: 0 1px 2.5px 0 rgba(0, 0, 0, 0.26), 0 1px 5px 0 rgba(0, 0, 0, 0.16);
+  box-shadow: 0 1px 2.5px 0 rgba(0, 0, 0, 0.26), 0 1px 5px 0 rgba(0, 0, 0, 0.16);
+  @include transition(background-color .3s);
+}
+
+/* Correção no botão do p:calendar */
+.ui-datepicker .ui-datepicker-buttonpane button:hover {
+  background-color: $primaryDarkColor;
+}
+
+/* Nome do usuário no menu lateral */
+.profile-name {
+  display: block !important; //Para que o botão fique separado do nome caso o nome for pequeno
+}
+
+@media (max-width: 1024px) {
+  .topbar-item-name { //VERIFICAR NECESSIDADE
+	display: block !important; //Para centralizar nomes pequenos
+	text-align: center;
+  }
+
+  .profile-name-abv {
+	display: none !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .profile-name-abv {
+	display: inline-block;
+	color: #fff;
+	margin-right: 10px;
+  }
+
+  .perfil-foto-topbar {
+	display: inline-block !important;
+  }
+}
+
+/* Classe para agrupar um input com botão de ação a sua direita */
+.input-group-action {
+  display: flex;
+  align-items: baseline;
+}
+
+/* Classe para agrupar um input com botão de ação a sua direita */
+.input-group-action *:nth-child(1) {
+  display: inline-flex;
+}
+
+/* Classe para agrupar um input com botão de ação a sua direita */
+.input-group-action button:nth-child(2) {
+  display: inline-flex;
+  margin-left: 10px;
+}
+
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: $accentColor;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 3px;
+}
+
+/* Para ter o título do .card centralizado */
+.title-center {
+  text-align: center;
+  line-height: 25px;
+  margin-top: 10px !important;
+}
+
+/* Cada título */
+.title-center .title {
+  display: block !important;
+  width: 100%;
+}
+
+/* Loader */
+.loader-wrapper {
+  position: fixed;
+  height: 2em;
+  width: 5em;
+  margin: auto;
+  padding-left: 250px;
+  padding-top: 75px;
+  z-index: 98;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+  -moz-transition: padding .2s ease-in;
+  -o-transition: padding .2s ease-in;
+  -webkit-transition: padding .2s ease-in;
+  transition: padding .2s ease-in;
+}
+
+.loader-wrapper:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(247, 247, 247, 0.35);
+}
+
+.loader-wrapper.menu-hidden {
+  padding-left: 0;
+  -moz-transition: padding .3s ease-in;
+  -o-transition: padding .3s ease-in;
+  -webkit-transition: padding .3s ease-in;
+  transition: padding .3s ease-in;
+}
+
+.loader {
+  position: relative;
+  font-size: 7px;
+  margin-left: -6px;
+  margin-top: -28px;
+  text-indent: -9999em;
+  border: 1.1em solid rgba(0, 0, 0, 0.2);
+  border-left-color: #000000;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 1.1s infinite linear;
+  animation: load8 1.1s infinite linear;
+}
+
+/* Menu escondido por causa do tamanho */
+@media (max-width: 1024px) {
+  .loader-wrapper {
+	padding-left: 0 !important;
+  }
+}
+
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+
+/* Loader do Login */
+.loader-wrapper.loader-wrapper-login {
+  padding-left: 0;
+  padding-top: 0;
+}
+
+.loader.loader-login {
+  margin-left: 10px;
+  margin-top: -14px;
+  font-size: 5px;
+}
+
+@-webkit-keyframes load8 {
+  0% {
+	-webkit-transform: rotate(0deg);
+  }
+  100% {
+	-webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes load8 {
+  0% {
+	transform: rotate(0deg);
+  }
+  100% {
+	transform: rotate(360deg);
+  }
+}
+
+//Mensagem de sucesso verde ao invés de azul
+.ui-messages-info {
+  background-color: #20B64E !important;
+  border-color: #20B64E !important;
+}
+
+//Melhorar visualização dos menus com textos grandes
+.layout-wrapper .ultima-menu li a span {
+  display: inline;
+}
+
+// Arrumando o botão de menu do Ultima na ultima versão
+#topbar-menu-button {
+  margin-right: auto !important;
+}
+
+// Titulo h2 nas telas de login
+.login-title {
+  color: #78909c;
+  margin-top: 0;
+  font-size: 19px !important;
+}
+
+#wrapper {
+  min-height: 100%;
+  position: relative;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+@media (max-width: 767px) {
+  #wrapper {
+	padding-bottom: 25px;
+  }
+}
+
+.login-panel {
+  padding: 16px;
+  margin: 10vh auto 10vh auto;
+}
+
+@media (max-width: 640px) {
+  .login-panel {
+	margin: 1.6rem auto;
+	width: auto;
+	max-width: 300px;
+  }
+}
+
+.login-footer {
+  bottom: auto;
+  color: #000;
+}
+
+@media (max-width: 1200px) {
+  .p-principal .ui-outputlabel {
+	text-align: center;
+  }
+
+  .p-principal .p-nome {
+	line-height: 24px;
+	margin-top: 0;
+  }
+}
+
+.p-principal .ui-outputlabel {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.p-principal .p-nome {
+  font-size: 25px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.p-foto {
+  height: 165px;
+  border: 4px solid #fff;
+  box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, .15), 0px -5px 30px -6px rgba(0, 0, 0, 0.10);
+  border-radius: 49.9%;
+  -webkit-border-radius: 49.9%;
+  -moz-border-radius: 49.9%;
+}
+
+.p-options {
+  float: right;
+}
+
+@media (max-width: 640px) {
+  .p-options {
+	width: 100%;
+  }
+}
+
+// Dialog dinâmico
+.dialog-dinamico {
+  min-width: 500px;
+}
+
+@media (max-width: 35em) {
+  .dialog-dinamico {
+	min-width: inherit;
+	min-height: inherit;
+  }
+
+  .dialog-dinamico .ui-dialog-footer button {
+	width: 100% !important;
+  }
+}
+
+.login-body {
+  background: #efefef;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  height: auto !important;
+}
+
+body {
+  margin: 0 0 100px;
+}
+
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.login-footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding-bottom: 15px;
+  font-size: 13px;
+}
+
+/* Menu escondido por causa do tamanho */
+@media (max-width: 1024px) {
+  .footer-card {
+	margin: 0 8px 10px 8px !important;
+	padding: 10px 10px 10px 8px !important;
+	transition: all 0.3s;
+  }
+}
+
+@media (min-width: 1025px) {
+  .footer-card {
+	margin: 0 20px 16px 270px !important;
+	padding: 10px !important;
+	transition: all 0.3s;
+  }
+
+  .footer-card.menu-hidden {
+	margin: 0 20px 16px 20px !important;
+	transition: all 0.3s;
+  }
+}
+
+.equipe-link {
+  color: #ffffff;
+}
+
+.equipe-link-footer {
+  color: #1f2bb8;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+.no-padding-right {
+  padding-right: 0 !important;
+}
+
+.no-padding-top {
+  padding-top: 0 !important;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+
+.no-padding-all {
+  padding: 0 !important;
+}
+
+.commandlink-icon-fa {
+  font-family: "FontAwesome" !important;
+  font-size: 4em !important;
+  color: black !important;
+}
+
+.commandlink-icon-ui {
+  font-family: "Material Icons" !important;
+  font-size: 4em !important;
+  color: black !important;
+}
+
+// Remover fonte negrita do p:message
+.ui-messages-info-summary {
+  font-weight: normal;
+}
+
+.ui-messages-error-summary {
+  font-weight: normal;
+}
+
+.ui-messages-warn-summary {
+  font-weight: normal;
+}
+
+.ui-messages-fatal-summary {
+  font-weight: normal;
+}
+
+.ui-menu .ui-menu-list li.ui-menuitem .ui-menuitem-link .ui-menuitem-text {
+  display: inline !important;
+}
+
+// ìcone do wizard que não existe
+.ui-icon-arrowthick-1-e::before {
+  content: "\e037" !important;
+}
+
+.ui-icon-arrowthick-1-w::before {
+  content: "\e037" !important;
+}
+
+.ui-icon-arrowthick-1-w {
+  transform: rotate(180deg) !important;
+}
+
+// espaçamento na navegação do wizard
+.ui-wizard-navbar {
+  padding-top: 6px;
+}
+
+// dataGrid de documentos
+.lista-documentos > .ui-datagrid-content {
+  border: 0;
+  padding-top: 8px;
+}
+
+.lista-documentos .ui-datagrid-column {
+  display: grid;
+}
+
+// Cabeçalho do dataGrid de documentos
+.lista-documentos-header > .ui-datagrid-header {
+  background-color: transparent !important;
+  border: 0 !important;
+  font-size: 18px !important;
+  border-bottom: 1px solid #ccc !important;
+  padding-bottom: 0 !important;
+  color: $textColor;
+}
+
+// margem no topo dos botões do rodapé no dataGrid de documentos
+.lista-arquivos tfoot .ui-button {
+  margin-top: 5px;
+}
+
+.lista-arquivos.no-header .ui-datagrid-header {
+  display: none;
+}
+
+.lista-arquivos.no-header .ui-datagrid-content {
+  border: 0 !important;
+}
+
+@media (max-width: 640px) {
+  // Colocar os itens do tabview, wizard, em uma linha cada
+  .ui-tabs.ui-tabs-top > .ui-tabs-nav {
+	display: grid;
+  }
+  .ui-wizard .ui-wizard-step-titles {
+	display: grid;
+  }
+
+  // alinhar texto ao centro dos botões do tabview
+  .ui-tabs.ui-tabs-top .ui-tabs-nav .ui-state-default a {
+	width: 94%;
+	text-align: center;
+  }
+
+  // borda completa nos botões do tabview
+  .ui-tabs.ui-tabs-top .ui-tabs-nav .ui-state-default {
+	border-width: 1px 1px 1px 1px;
+  }
+
+  // corrigindo botões do tabview
+  .ui-tabs .ui-tabs-nav li {
+	margin: 0 .1em 1px 0;
+  }
+
+}
+
+// dataList de documentos
+.lista-documentos .ui-datalist-content {
+  border: 0 !important;
+}
+
+// corrigir cor do icone do accordionpanel (ui-widget-content)
+.ui-accordion .ui-accordion-header .ui-icon {
+  color: #ffffff;
+}
+
+.link-no-decoration {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+// Para agrupar o label e input de um checkbox
+.input-check-box .ui-chkbox {
+  padding-left: 10px;
+}
+
+// Corrigindo cor do texto do botão de upload
+.ui-fileupload .ui-fileupload-buttonbar .ui-button {
+  background-color: $accentColor;
+  color: $accentTextColor;
+}
+
+.ui-fileupload .ui-fileupload-buttonbar .ui-icon {
+  color: $accentTextColor;
+}
+
+.white-input.ui-inputfield.ui-state-focus {
+  border-color: #FFFFFF;
+}
+
+.white-input::placeholder {
+  color: #FFFFFF;
+}
+
+.ui-datatable .ui-datatable-header .ui-inputfield::placeholder {
+  color: #FFFFFF;
+}
+

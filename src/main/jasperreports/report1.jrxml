@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2dd6fd26-3bea-4402-bfdb-ab50e0d73066">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="listaAvaliacoes" class="java.util.List"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\flavio.madureira\\Documents\\workspace\\aede\\src\\main\\jasperreports\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     avaliacao."id" AS avaliacao_id,
+     avaliacao."num_func" AS avaliacao_num_func,
+     avaliacao."num_vinc" AS avaliacao_num_vinc,
+     avaliacao."cpf" AS avaliacao_cpf,
+     avaliacao."nome_servidor" AS avaliacao_nome_servidor,
+     avaliacao."quadro" AS avaliacao_quadro,
+     avaliacao."cargo_id" AS avaliacao_cargo_id,
+     avaliacao."cargo" AS avaliacao_cargo,
+     avaliacao."orgao_id" AS avaliacao_orgao_id,
+     avaliacao."orgao" AS avaliacao_orgao,
+     avaliacao."setor_id" AS avaliacao_setor_id,
+     avaliacao."setor" AS avaliacao_setor,
+     avaliacao."regional_id" AS avaliacao_regional_id,
+     avaliacao."regional" AS avaliacao_regional,
+     avaliacao."formulario" AS avaliacao_formulario,
+     avaliacao."etapa" AS avaliacao_etapa,
+     avaliacao."dt_ini_etapa" AS avaliacao_dt_ini_etapa,
+     avaliacao."dt_fim_etapa" AS avaliacao_dt_fim_etapa,
+     avaliacao."dt_processa" AS avaliacao_dt_processa,
+     avaliacao."dt_avaliacao" AS avaliacao_dt_avaliacao,
+     avaliacao."nota" AS avaliacao_nota,
+     avaliacao."status" AS avaliacao_status,
+     avaliacao."obs" AS avaliacao_obs,
+     avaliacao."funcao" AS avaliacao_funcao,
+     avaliacao."dt_admissao" AS avaliacao_dt_admissao,
+     avaliacao."prazo_devolucao" AS avaliacao_prazo_devolucao
+FROM
+     "aede"."avaliacao" avaliacao
+WHERE
+      avaliacao.status = 'PROCESSADA']]>
+	</queryString>
+	<field name="avaliacao_id" class="java.lang.Integer"/>
+	<field name="avaliacao_num_func" class="java.lang.Integer"/>
+	<field name="avaliacao_num_vinc" class="java.lang.Integer"/>
+	<field name="avaliacao_cpf" class="java.lang.String"/>
+	<field name="avaliacao_nome_servidor" class="java.lang.String"/>
+	<field name="avaliacao_quadro" class="java.lang.String"/>
+	<field name="avaliacao_cargo_id" class="java.lang.Integer"/>
+	<field name="avaliacao_cargo" class="java.lang.String"/>
+	<field name="avaliacao_orgao_id" class="java.lang.Integer"/>
+	<field name="avaliacao_orgao" class="java.lang.String"/>
+	<field name="avaliacao_setor_id" class="java.lang.String"/>
+	<field name="avaliacao_setor" class="java.lang.String"/>
+	<field name="avaliacao_regional_id" class="java.lang.String"/>
+	<field name="avaliacao_regional" class="java.lang.String"/>
+	<field name="avaliacao_formulario" class="java.lang.Integer"/>
+	<field name="avaliacao_etapa" class="java.lang.Integer"/>
+	<field name="avaliacao_dt_ini_etapa" class="java.sql.Date"/>
+	<field name="avaliacao_dt_fim_etapa" class="java.sql.Date"/>
+	<field name="avaliacao_dt_processa" class="java.sql.Date"/>
+	<field name="avaliacao_dt_avaliacao" class="java.sql.Date"/>
+	<field name="avaliacao_nota" class="java.math.BigDecimal"/>
+	<field name="avaliacao_status" class="java.lang.String"/>
+	<field name="avaliacao_obs" class="java.lang.String"/>
+	<field name="avaliacao_funcao" class="java.lang.String"/>
+	<field name="avaliacao_dt_admissao" class="java.sql.Date"/>
+	<field name="avaliacao_prazo_devolucao" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="20" width="100" height="20" uuid="8ef551eb-772b-4c3a-88c9-a3fb619e5a78"/>
+				<textFieldExpression><![CDATA[$F{avaliacao_cpf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="03b1d537-2263-46aa-a702-aeef354121de"/>
+				<textFieldExpression><![CDATA[$F{avaliacao_nome_servidor}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="40" width="555" height="85" uuid="8562b3c9-2578-4d61-8a9c-2aa23d6b4865"/>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

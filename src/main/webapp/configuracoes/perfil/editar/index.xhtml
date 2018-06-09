@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/index.xhtml">
+
+    <ui:define name="meta">
+        <f:metadata>
+            <f:viewParam name="id" value="#{perfilBean.idElemento}" />
+            <f:viewAction action="#{perfilBean.loadModel}" />
+            <f:viewAction action="#{perfilBean.init()}" />
+        </f:metadata>            
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="breadCrumb">
+            <p:breadCrumb>
+                <p:menuitem value="Home" url="/index.xhtml"/>
+                <p:menuitem value="Gerenciar Perfis" url="../index.xhtml"/>
+                <p:menuitem value="Cadastro de Perfil" url=""/>
+            </p:breadCrumb>
+        </h:form>
+
+        <h:form id="form_1">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+                        <h1>Cadastro de Perfil</h1>    
+                        <p:messages id="messages"  autoUpdate="true" closable="true" />
+                        
+                        <div class="ui-g">
+                            
+                            <h:panelGroup layout="block" class="ui-g-12 ui-fluid">
+                                <p:fieldset legend="Dados do Perfil" >
+                                    <h:panelGroup class="ui-g-12 ui-md-12 ui-lg-6" layout="block" >
+                                        <p:panelGrid layout="grid" columns="2" >
+                                            <h:panelGroup styleClass="md-inputfield">
+                                                <p:inputText id="nome" size="70" value="#{perfilBean.perfil.nome}"
+                                                             required="true" requiredMessage="Campo 'Nome' obrigatório."/>
+                                                <p:outputLabel value="Nome " for="nome"/>
+                                            </h:panelGroup>
+
+                                            <h:panelGroup styleClass="md-inputfield">
+                                                <p:spinner id="nivel" min="2" max="10" size="5" value="#{perfilBean.perfil.nivel}" 
+                                                           required="true" requiredMessage="Campo 'Nível' obrigatório."/>
+                                                <p:outputLabel value="Nível" for="nivel"/>
+                                            </h:panelGroup>
+                                        </p:panelGrid>
+                                    </h:panelGroup>
+                                    <h:panelGroup class="ui-g-12 ui-md-12 ui-lg-6" layout="block" >
+                                        <p:panelGrid layout="grid" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-9">
+                                            <p:outputLabel value="Ativo" for="fl_ativo"/>
+                                            <p:selectBooleanCheckbox id="fl_ativo" value="#{perfilBean.perfil.flAtivo}"/>
+                                        </p:panelGrid>
+                                    </h:panelGroup>
+                                </p:fieldset>
+
+                                <br/>
+
+                                <p:tree value="#{perfilBean.listaMenu}" widgetVar="treeSingleWidget" var="doc"
+                                        selectionMode="checkbox" 
+                                        selection="#{perfilBean.listaMenuSelecionados}">
+                                    <p:treeNode>
+                                        <h:outputText value="#{doc.descricao}"/>
+                                    </p:treeNode>
+
+                                </p:tree> 
+                            </h:panelGroup>
+
+                            <br/>
+
+                            <h:panelGroup layout="block" class="ui-g-12 actionDiv">
+                                <p:commandButton id="btnSalvar" update="form_1" value="Salvar" action="#{perfilBean.salvar}"
+                                                 icon="ui-icon-save"/>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

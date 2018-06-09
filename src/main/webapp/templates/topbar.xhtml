@@ -1,0 +1,111 @@
+<ui:composition
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<div class="topbar clearfix">
+		<div class="topbar-left">
+			<div class="topbar-logo">
+				<a href="#{facesContext.externalContext.requestContextPath}">
+					<p:graphicImage styleClass="logo-img" value="#{resource['img/sgs_menu.svg']}"/>
+				</a>
+			</div>
+		</div>
+
+		<div class="topbar-right">
+			<a id="menu-button" href="#">
+				<i/>
+			</a>
+
+			<a id="topbar-menu-button" href="#">
+				<i class="material-icons">&#xE5D4;</i>
+			</a>
+			<ui:fragment rendered="#{authenticationController.authenticated}">
+				<ul class="topbar-items fadeInDown animated">
+					<ui:fragment>
+						<li class="profile-item">
+
+							<!-- Perfil mobile -->
+							<a href="#">
+								<!--Primeiro nome-->
+								<p:outputLabel
+										value="#{fn:split(authenticationController.usuarioSistema.usuario.pessoa.nome, ' ')[0]}"
+										styleClass="profile-name-abv" converter="nomeConverter"/>
+
+								<!-- Foto de Perfil -->
+								<p:graphicImage styleClass="perfil-foto-topbar"
+								                value="#{imagePortalPerfilController.fotoPerfil}"
+								                cache="false"/>
+
+								<!--Nome completo -->
+								<p:outputLabel value="#{authenticationController.usuarioSistema.usuario.pessoa.nome}"
+								               converter="nomeConverter"
+								               styleClass="topbar-item-name" style="font-weight: bold"/>
+
+								<!-- Cpf -->
+								<p:outputLabel class="topbar-item-name"
+								               value="#{authenticationController.usuarioSistema.usuario.pessoa.cpfFormatado}"
+								               style=" margin-bottom: 10px"/>
+
+								<!-- Perfil -->
+								<p:outputLabel class="topbar-item-name"
+								               value="#{authenticationController.perfilAtual.nome}"
+								               style="padding-bottom: 10px"/>
+
+								<i class="material-icons dropdown-arrow">&#xE313;</i>
+							</a>
+
+							<!-- Perfil Desktop -->
+							<ul class="ultima-menu animated">
+								<h:panelGroup styleClass="topbar-dados-perfil">
+									<li role="menuitem" class="centralizar">
+
+										<!--Nome Completo -->
+										<p:outputLabel
+												value="#{authenticationController.usuarioSistema.usuario.pessoa.nome}"
+												converter="nomeConverter"
+												style="display: block; margin-top: 10px; margin-bottom: 10px"
+												styleClass="negrito"/>
+
+										<!-- Cpf -->
+										<p:outputLabel
+												value="#{authenticationController.usuarioSistema.usuario.pessoa.cpfFormatado}"
+												style="display: block; padding-bottom: 10px"/>
+
+										<!-- Perfil -->
+										<p:outputLabel value="#{authenticationController.perfilAtual.nome}"
+										               style="display: block; padding-bottom: 10px"/>
+
+									</li>
+								</h:panelGroup>
+
+								<li role="menuitem">
+									<p:commandLink styleClass="ripplelink" action="#{authenticationController.logout}">
+										<i class="fa fa-sign-out"/>
+										<span>Sair</span>
+									</p:commandLink>
+								</li>
+							</ul>
+						</li>
+					</ui:fragment>
+				</ul>
+			</ui:fragment>
+			<ui:fragment rendered="#{authenticationController.authenticated eq false}">
+				<ul class="topbar-items fadeInDown animated">
+					<ui:fragment>
+						<li class="profile-item">
+							<a href="#">
+								<p:commandButton value="Login" icon="fa fa-user" styleClass="secondary"
+								                 action="#{authenticationController.logout}"/>
+							</a>
+						</li>
+					</ui:fragment>
+				</ul>
+			</ui:fragment>
+		</div>
+	</div>
+
+</ui:composition>

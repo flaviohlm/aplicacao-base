@@ -1,0 +1,133 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/index.xhtml">
+
+    <ui:define name="meta">
+        <f:metadata>
+            <f:viewParam name="id" value="#{usuarioBean.idElemento}" />
+            <f:viewAction action="#{usuarioBean.loadModel}" />
+        </f:metadata>            
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <p:breadCrumb>
+                <p:menuitem value="Home" url="/index.xhtml"/>
+                <p:menuitem value="Gerenciar Usuários" url="../index.xhtml"/>
+                <p:menuitem value="Cadastro de Usuário" url=""/>
+            </p:breadCrumb>
+        </h:form>
+
+        <h:form id="form_1">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+                        <h1>Cadastrar Usuário(s)</h1>    
+                        <p:messages id="messages"  autoUpdate="true" closable="true" />
+
+                        <div class="ui-g">
+                            <h:panelGroup layout="block" class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid" >
+                                <p:fieldset legend="Consultar Usuário" > 
+                                    <h:panelGroup id="consultaDados" >
+                                        <p:panelGrid columns="1" layout="grid" columnClasses="ui-grid-col-6">
+                                            <h:panelGroup styleClass="md-inputfield">
+                                                <p:inputMask id="cpf" mask="999.999.999-99" value="#{usuarioBean.usuario.pessoa.cpf}" />
+                                                <p:outputLabel for="cpf" value="CPF" />
+                                            </h:panelGroup>
+                                        </p:panelGrid>
+
+                                        <p:panelGrid columns="2" layout="grid">
+                                            <p:commandButton id="limpar" value="Limpar" icon="ui-icon-highlight-off" process="@this" update="form_1" actionListener="#{usuarioBean.limpar()}">
+                                                <p:resetInput target="consultaDados" />
+                                            </p:commandButton>
+                                            <p:commandButton action="#{usuarioBean.consultarDadosServidor}" value="Consultar" icon="ui-icon-search" id="consultar" update=":form_1"/>
+
+                                        </p:panelGrid>
+                                    </h:panelGroup>
+                                </p:fieldset>
+                            </h:panelGroup>
+
+
+                            <h:panelGroup class="ui-g-12" layout="block" rendered="#{usuarioBean.showDadosServidor}">
+
+
+                                <p:dataTable value="#{usuarioBean.listaUsuariosCadastrar}" var="user" widgetVar="modelPerfil" emptyMessage="Nenhum registro encontrado." paginator="true" paginatorAlwaysVisible="false" rows="5" rowIndexVar="rowIndex" rowKey="#{model.id}" >
+
+                                    <p:column headerText="CPF" class="centralizar" >
+                                        <h:outputText value="#{user.pessoa.cpfFormatado}" />   
+                                    </p:column>
+
+                                    <p:column headerText="Nome" sortBy="#{user.pessoa.nome}">
+                                        <h:outputText value="#{user.pessoa.nome}" />   
+                                    </p:column>
+
+                                    <p:column headerText="Nº Funcional" class="centralizar" >
+                                        <h:outputText value="#{user.pessoa.matricula}" />    
+                                    </p:column>    
+
+                                    <p:column headerText="Lotação" >
+                                        <h:outputText value="#{user.pessoa.lotacao}" />    
+                                    </p:column> 
+
+                                </p:dataTable>
+
+
+                                <br/>
+
+                                <p:dataTable id="dataTablePerfis" widgetVar="modelPerfil" emptyMessage="Nenhum registro encontrado." var="model" paginator="true" paginatorAlwaysVisible="false" rows="10" value="#{usuarioBean.listaPerfis}" selection="#{usuarioBean.listaPerfisSelecionados}" rowIndexVar="rowIndex" rowKey="#{model.id}" >
+
+                                    <p:ajax event="toggleSelect" listener="#{usuarioBean.selecionarPerfilBlocoListener}" update=":form_1" />
+                                    <p:ajax event="rowSelectCheckbox" listener="#{usuarioBean.selecionarPerfilBlocoListener}" update=":form_1" />
+                                    <p:ajax event="rowUnselectCheckbox" listener="#{usuarioBean.selecionarPerfilBlocoListener}" update=":form_1" />
+                                    <p:ajax event="rowSelect" listener="#{usuarioBean.selecionarPerfilBlocoListener}" update=":form_1" />
+                                    <p:ajax event="rowUnselect" listener="#{usuarioBean.selecionarPerfilBlocoListener}" update=":form_1" />
+
+                                    <p:column selectionMode="multiple" width="50" class="centralizar"/>
+
+                                    <p:column sortBy="nome"  headerText="Perfil" >
+                                        <h:outputText value="#{model.nome}" />   
+                                    </p:column>
+
+                                </p:dataTable>  
+
+                            </h:panelGroup>
+
+
+                            <h:panelGroup class="ui-g-12" layout="block" rendered="#{usuarioBean.showOrgaos}">
+                                <p:outputLabel id="orgao" value="Órgão(s):" class="label-destaque" >
+                                    <p:selectCheckboxMenu id="multiple" value="#{usuarioBean.usuario.listaOrgaos}" converter="#{orgaoConverter}" label="Órgão" multiple="true" filter="true" filterMatchMode="contains" panelStyle="width:300px">
+                                        <f:selectItems value="#{usuarioBean.listaOrgao}" var="orgao" itemLabel="#{orgao.nome}" itemValue="#{orgao}" />
+                                        <f:attribute name="collectionType" value="java.util.ArrayList" />
+                                    </p:selectCheckboxMenu>
+                                </p:outputLabel>
+                            </h:panelGroup>
+
+                            <p:panelGrid columns="1" layout="grid" id="quadros_unidade">
+                                <p:outputLabel value="Unidade de Ensino*: " class="label-destaque" rendered="#{usuarioBean.showUnidades}" >
+                                    <p:selectOneMenu value="#{usuarioBean.usuario.unidadeEnsino}" converter="#{unidadeEnsinoConverter}">
+                                        <f:selectItem itemLabel="Selecione" itemValue="" />
+                                        <f:selectItems value="#{usuarioBean.listaUnidadeEnsino}" var="unidade" itemLabel="#{unidade.sigla}" itemValue="#{unidade}" />
+                                        <p:ajax listener="#{usuarioBean.selecionarUnidadeListener}" update="quadros_unidade" />
+                                    </p:selectOneMenu>
+                                </p:outputLabel>
+
+                                <p:outputLabel  value="Quadros da Unidade de Ensino: " class="label-destaque" rendered="#{usuarioBean.showQuadros}" >
+                                    <h:outputLabel value="#{usuarioBean.usuario.unidadeEnsino.listaQuadroString}" class="label-normal" />
+                                </p:outputLabel>
+                            </p:panelGrid>
+
+                            <h:panelGroup layout="block" class="ui-g-12 actionDiv"  >
+                                <p:commandButton id="btnSalvar" update="form_1" value="Salvar" action="#{usuarioBean.salvar}" 
+                                                 rendered="#{usuarioBean.showDadosServidor}" 
+                                                 disabled="#{usuarioBean.disableSave}" icon="ui-icon-save"/>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

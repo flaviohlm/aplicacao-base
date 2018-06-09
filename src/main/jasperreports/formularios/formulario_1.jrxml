@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="formulario_1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ffc29526-f219-403e-9557-a5c2b82f95be">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="212"/>
+	<parameter name="avaliacaoid" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT a.nome, a.cargo_nome, a.numfunc, a.numvinc, a.dtini, a.dtfim, m.num_func as numfunc_membro, m.num_vinc as numvinc_membro, m.nome as nome_membro, m.cargo_descricao as cargo_membro
+FROM aede.avaliacao a
+INNER JOIN aede.membro_comissao m ON (m.comissao_id = a.comissao)
+WHERE a.id IN ($P{avaliacaoid})]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="cargo_nome" class="java.lang.String"/>
+	<field name="numfunc" class="java.lang.Integer"/>
+	<field name="numvinc" class="java.lang.Integer"/>
+	<field name="dtini" class="java.sql.Date">
+		<fieldDescription><![CDATA[data de inicio da avaliação]]></fieldDescription>
+	</field>
+	<field name="dtfim" class="java.sql.Date">
+		<fieldDescription><![CDATA[Data fim da etapa da avaliação
+]]></fieldDescription>
+	</field>
+	<field name="numfunc_membro" class="java.lang.Integer"/>
+	<field name="numvinc_membro" class="java.lang.Integer"/>
+	<field name="nome_membro" class="java.lang.String"/>
+	<field name="cargo_membro" class="java.lang.String"/>
+	<group name="servidor_grupo" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{numfunc}]]></groupExpression>
+		<groupHeader>
+			<band height="212">
+				<staticText>
+					<reportElement x="30" y="181" width="499" height="31" uuid="f1c7feb8-3d8b-4692-87ab-bb569719f93a"/>
+					<textElement textAlignment="Justified"/>
+					<text><![CDATA[	Art. 2º Compõem a Comissão Especial de Avaliação de Desempenho, sob a presidência do primeiro, os seguintes servidores:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="130" y="24" width="398" height="15" uuid="33659aa9-c0e0-427b-b542-6d716d89e8b5"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="70" y="24" width="60" height="15" uuid="8a1abd6c-3be3-4575-8f63-63a09afd0701"/>
+					<text><![CDATA[O servidor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="528" y="24" width="27" height="15" uuid="9bcff8c4-b118-4884-962c-bc3527bc86e0"/>
+					<text><![CDATA[, em]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="29" y="39" width="448" height="15" uuid="4dcb3a72-c90f-424b-8d9a-5e0850801cce"/>
+					<text><![CDATA[conformidade com o Art. 18, inciso I e o Art. 19, do Decreo nº XXXX, de XX de AAAAAAAAA de 2015,]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="70" y="66" width="60" height="15" uuid="2a1333cc-e220-4ac6-8ee7-d584d4cc2177"/>
+					<text><![CDATA[RESOLVE:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="29" y="97" width="499" height="28" uuid="2dd2bef4-dbae-4324-adb6-316f1085b439"/>
+					<textElement textAlignment="Justified"/>
+					<text><![CDATA[	Art. 1º COMPOR  a Comissão Especial de Avaliação de Desempenho, responsável pela orientação e avaliação do servidor]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="130" y="110" width="398" height="15" uuid="78ac884c-54b6-4929-9cd3-a8c629306c0d"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="29" y="125" width="101" height="15" uuid="29be463d-44bf-4a66-b303-92f126d07274"/>
+					<text><![CDATA[ocupante do cargo de ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="130" y="125" width="398" height="15" uuid="88adeb7a-c0a7-48c1-b726-abbf2358958b"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{cargo_nome}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="30" y="140" width="61" height="15" uuid="bfb1b28b-60ea-4c6c-8998-133fe1ced464"/>
+					<text><![CDATA[matrícula nº ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="91" y="140" width="72" height="15" uuid="5a05dbed-0ce8-4ce5-9ff8-2bc4c819f2e9"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{numfunc}+"-"+$F{numvinc}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="163" y="140" width="289" height="15" uuid="5c015c8e-060f-4957-86e5-16be3e527670"/>
+					<text><![CDATA[, durante o período do Estágio Probatório, compreendido entre ]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement x="452" y="140" width="76" height="15" uuid="3e0f2a8f-b791-41ea-9135-1a9e5ecf76df"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{dtini}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="30" y="155" width="18" height="15" uuid="82495475-1ff7-4ac0-aab6-3828a9a9d966"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[a]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement x="48" y="155" width="92" height="15" uuid="879c9e9d-19db-4e97-aa06-499ef33e530c"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{dtfim}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="103" splitType="Stretch">
+			<rectangle>
+				<reportElement x="70" y="51" width="485" height="51" backcolor="#CCCCCC" uuid="ed60e022-81de-4a3d-bb52-d6c2d7b913be"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="205" y="30" width="145" height="15" uuid="1bc3a995-a2d9-4b62-a0c8-4143c8e7c141"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[ESTÁGIO PROBATÓRIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="115" y="15" width="324" height="15" uuid="1cfc7e77-75ec-4d17-8242-25f3eef47c4f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[COMISSÃO ESPECIAL DE AVALIAÇÃO DE DESEMPENHO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="0" width="100" height="15" uuid="4ee7210d-4c4a-4250-a22b-81d7d3339188"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[FORMULÁRIO I]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="249" y="61" width="145" height="15" uuid="ea4343bf-08c8-4793-bfa8-cfc698b54841"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[GOVERNO DO TOCANTINS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="76" width="197" height="15" uuid="f4a19c4d-d15f-4db9-9676-542d5431669a"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[SECRETARIA DA ADMINISTRAÇÃO]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="59" y="0" width="406" height="15" uuid="8c3f89dd-e90f-444b-b0ad-b1af81f04620"/>
+				<textFieldExpression><![CDATA[$F{nome_membro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="16" width="373" height="15" uuid="db3f206c-37d2-48d3-8613-0478aecf4aac"/>
+				<textFieldExpression><![CDATA[$F{cargo_membro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="465" y="0" width="63" height="15" uuid="1f34aced-ae7d-468d-a43d-52182367e29d"/>
+				<text><![CDATA[, matrícula nº]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="29" y="16" width="62" height="15" uuid="655449f1-8176-4ac0-adf7-24bb62666523"/>
+				<textFieldExpression><![CDATA[$F{numfunc_membro}+"-"+$F{numvinc_membro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="91" y="16" width="39" height="15" uuid="aff7f48e-d621-4926-8853-bfc8594e521e"/>
+				<text><![CDATA[, cargo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="503" y="16" width="5" height="15" uuid="013e8fc1-1454-48ac-a44a-2ebcf31fac0b"/>
+				<text><![CDATA[,]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="59" y="24" width="436" height="20" uuid="ce80dd26-1f76-4841-8fa3-f88b68148ca3"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Presidente da Comissão Especial de Avaliação de Desempenho]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

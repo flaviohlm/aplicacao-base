@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="description" content="Siga Unicet - Governo do Tocantins"/>
+        <meta property="og:title" content="Siga Unicet"/>
+        <meta property="og:description" content="Siga Unicet  - Governo do Tocantins"/>
+        <meta property="og:image" content="#{resource['img/portal-web.png']}"/>
+
+    </f:facet>
+    <title>
+        <ui:insert name="title">
+            #{applicationUtil.name}
+        </ui:insert>
+    </title>
+    <h:outputScript name="js/ripple.js" library="ultima-layout"/>
+    <h:outputScript name="js/layout.js" library="ultima-layout"/>
+    <h:outputScript name="pace.min.js" library="js"/>
+    <h:outputScript name="loader_secad.js" library="js"/>
+    <h:outputScript name="jquery.mask.min.js" library="js"/>
+    <h:outputScript name="MascaraValidacao.js" library="js"/>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/icon/favicon.ico']}"/>
+    <link rel="icon" type="image/x-icon" href="#{resource['img/icon/favicon.ico']}"/>
+</h:head>
+
+<h:body styleClass="login-body">
+    <div id="wrapper" class="wrapper">
+        <div class="card login-panel ui-fluid">
+            <div class="ui-g">
+                <ui:insert name="content"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-footer">
+        Desenvolvido por <a target="_blank" class="equipe-link" href="http://sistemas.secad.to.gov.br/equipe/">DITEC/GESIS</a> - Versão: #{applicationUtil.version}
+        <br/>
+        Copyright © 2018 SECAD
+    </div>
+
+    <div id="loader-wrapper-2" class="loader-wrapper loader-wrapper-login">
+        <div class="loader loader-login"/>
+    </div>
+
+    <p:ajaxStatus>
+        <f:facet name="start">
+            <div id="loader-wrapper-login" class="loader-wrapper loader-wrapper-login">
+                <div class="loader loader-login"/>
+            </div>
+        </f:facet>
+
+        <f:facet name="complete">
+            <h:outputText value=""/>
+        </f:facet>
+    </p:ajaxStatus>
+
+</h:body>
+
+<h:outputStylesheet name="css/ripple.css" library="ultima-layout"/>
+<h:outputStylesheet name="css/layout-#{ultimaPreferences.theme}.css" library="ultima-layout"/>
+<script>
+    /* Bug no md-inputfield com o autofill do browser */
+    $(function () {
+        $(document).ready(function () {
+            setTimeout(function () {
+                var autofilled = document.querySelectorAll('input:-webkit-autofill');
+                if (autofilled) {
+                    $("input").addClass("ui-state-filled");
+                }
+            }, 500);
+        });
+    });
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-113296326-1"/>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-113296326-1');
+</script>
+</html>

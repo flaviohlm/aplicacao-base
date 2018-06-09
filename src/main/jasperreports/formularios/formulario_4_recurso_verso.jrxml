@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="formulario_4_recurso_verso" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="262b5ca2-0a16-46b0-8a0b-36f1f8fba580">
+	<property name="ireport.zoom" value="1.1289478601075547"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="178"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="recurso" class="java.lang.Integer" isForPrompting="false"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT r.id, a.nome_servidor, a.num_func, a.num_vinc, a.cargo, a.dt_admissao, a.funcao, a.orgao, a.setor, m.nome, a.etapa, r.argumentacao
+FROM aede.recurso r
+INNER JOIN aede.avaliacao a ON (a.id = r.avaliacao_id)
+INNER JOIN aede.membro_comissao_revisao mcr ON (mcr.comissao_revisao_id = r.comissao_revisao_id)
+INNER JOIN aede.membro m ON (m.id = mcr.membro_id)
+WHERE  mcr.presidente_da_comissao = true]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="nome_servidor" class="java.lang.String"/>
+	<field name="num_func" class="java.lang.Integer"/>
+	<field name="num_vinc" class="java.lang.Integer"/>
+	<field name="cargo" class="java.lang.String"/>
+	<field name="dt_admissao" class="java.sql.Date"/>
+	<field name="funcao" class="java.lang.String"/>
+	<field name="orgao" class="java.lang.String"/>
+	<field name="setor" class="java.lang.String"/>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[Nome do Sistema]]></fieldDescription>
+	</field>
+	<field name="etapa" class="java.lang.Integer"/>
+	<field name="argumentacao" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="83" splitType="Stretch">
+			<rectangle>
+				<reportElement key="rectangle-2" mode="Opaque" x="1" y="3" width="554" height="80" backcolor="#D9D9D4" uuid="8bf0bdd8-cb8c-429c-aa3e-8f50c6c2bce5"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-1" mode="Transparent" x="182" y="24" width="175" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="b7b34eec-40c8-45ee-bb55-ee569376c270"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[FORMULÁRIO IV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-2" mode="Transparent" x="164" y="42" width="210" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="64cb43ba-6013-48b3-92c1-4b173f58344b"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[INTERPOSIÇÃO DE RECURSO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-2" mode="Transparent" x="164" y="59" width="210" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="ac770f2e-67b4-4e49-9908-753155714c86"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[ESTÁGIO PROBATÓRIO]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="391" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-14" x="22" y="19" width="122" height="19" uuid="af3a16f5-2eb7-4beb-8bfe-d86b14cea61f"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[A Sua Senhoria, o Senhor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-15" x="23" y="57" width="169" height="17" uuid="67f1f328-2d01-4767-92fc-df304946c3d7"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Presidente da Comissão de Revisão]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-19" x="23" y="94" width="70" height="17" uuid="b437fa77-9578-4ce6-b315-7a04fc375287"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Palmas - TO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-20" x="49" y="135" width="95" height="16" uuid="e1049f3b-ea2b-4277-8674-145de0dee585"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Senhor Presidente,]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="23" y="40" width="351" height="15" uuid="0f084ad2-742c-4ab8-ac2e-b9011269927c"/>
+				<box>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="23" y="74" width="351" height="20" uuid="f79e8678-922a-4d40-a075-b298b5f10f70"/>
+				<textFieldExpression><![CDATA[$F{orgao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-20" x="49" y="177" width="470" height="16" uuid="6a538d87-d94e-4dd5-9ee6-359a929e018c"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Venho, por meio deste instrumento, requerer, junto a essa Comissão, pelos motivos aqui apresentados:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-20" x="23" y="216" width="252" height="16" uuid="43bb75ef-c588-481d-9112-f9a6c20415a7"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[(        ) Revisão do resultado da               etapa da AEDE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-20" x="22" y="245" width="252" height="16" uuid="81bbe82c-d5a7-4963-97da-55dbf8bb79ba"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[(        ) Revisão do resultado final da AEDE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-20" x="229" y="294" width="81" height="16" uuid="5a6687dd-d9a6-4ebe-95ea-a1131cfc0b32"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[M O T I V O S]]></text>
+			</staticText>
+			<line>
+				<reportElement x="166" y="229" width="26" height="1" uuid="eb2cb783-b73b-4848-a97e-60fa1e913875"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="166" y="216" width="26" height="13" uuid="331acb0a-bde9-4b20-8b3d-f6edb52a803a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etapa}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="23" y="320" width="496" height="20" uuid="48d92986-c366-4d72-8714-79a1622f2a5a"/>
+				<textFieldExpression><![CDATA[$F{argumentacao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="62" splitType="Stretch">
+			<frame>
+				<reportElement x="1" y="0" width="538" height="62" uuid="ef4bb90b-3556-4ffe-bccc-028b58fcfebb"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<line>
+					<reportElement x="269" y="0" width="1" height="62" uuid="ce0938de-0a0c-4233-8022-395136178b46"/>
+				</line>
+				<line>
+					<reportElement x="22" y="42" width="100" height="1" uuid="306183dd-58b3-4807-a9b2-4c3f6429d251"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="124" y="29" width="145" height="20" uuid="c2b0a478-331d-434d-bb09-54f3ff6dbc54"/>
+					<text><![CDATA[, em _____/_____/________]]></text>
+				</staticText>
+				<line>
+					<reportElement x="286" y="41" width="242" height="1" uuid="7c06b021-6b7d-45bc-949b-f564b25a893e"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<textField>
+					<reportElement x="286" y="43" width="242" height="15" uuid="b24e1b49-6cff-4f2a-8329-731c60a97a93"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nome_servidor}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

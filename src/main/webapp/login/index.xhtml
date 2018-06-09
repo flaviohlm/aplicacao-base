@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/login.xhtml">
+
+    <ui:define name="title">
+        Login - #{applicationUtil.name}
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="loginForm" prependId="false">
+            
+            <div class="ui-g-12">
+                <p:graphicImage styleClass="login-logo" name="sgs_login.svg" library="img"/>
+                <h2 class="login-title">Sistema de Gestão de Evolução Funcional</h2>
+            </div>
+            
+            <p:growl id="messages" autoUpdate="true" life="7000" sticky="false"/>
+            
+            <div class="ui-g-12">
+                <h:panelGroup styleClass="md-inputfield">
+                    <p:inputText id="login" styleClass="cpf_login"/>
+                    <p:outputLabel for="login" value="CPF"/>
+                </h:panelGroup>
+            </div>
+            
+            <div class="ui-g-12">
+                <h:panelGroup styleClass="md-inputfield">
+                    <p:password id="senha" styleClass="senha_login"/>
+                    <p:outputLabel for="senha" value="Senha"/>
+                </h:panelGroup>
+            </div>
+            
+            <div class="ui-g-12">
+                <p:commandButton value="Entrar" ajax="false" icon="ui-icon-person" style="margin-top:0; margin-bottom:10px;"/>                
+            </div>
+            
+        </h:form>
+
+        <!-- Para que o loader apareça quando realizar o login -->
+        <h:outputScript>
+            $('#loginForm').submit(function () {
+                startLoading();
+                return true;
+            });
+            jQuery(function ($) {
+                $('#login').mask('000.000.000-00');
+            });
+        </h:outputScript>
+    </ui:define>
+</ui:composition>

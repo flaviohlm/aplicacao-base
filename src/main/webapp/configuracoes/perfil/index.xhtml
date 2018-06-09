@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/index.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+            <p:breadCrumb>
+                <p:menuitem value="Home" url="/index.xhtml"/>
+                <p:menuitem value="Gerenciar Perfis" url=""/>
+            </p:breadCrumb>
+        </h:form>
+
+        <h:form id="frmPerfilView">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+                        <h1>Gerenciar Perfis</h1>
+                        <p:messages id="messages" autoUpdate="true" closable="true"  />
+
+                        <p:commandButton id="btn_novo" update="dataTablePerfil" value="Adicionar" 
+                                         action="#{perfilBean.gotoPerfilNew}" icon="ui-icon-add" />
+                        <br/>
+                        <br/>
+
+                        <p:dataTable id="dataTablePerfil" paginator="true" rows="30" widgetVar="modelPerfil"
+                                     paginatorAlwaysVisible="false" styleClass="reflowTable"
+                                     emptyMessage="Nenhum registro encontrado." var="model" reflow="true"
+                                     value="#{perfilBean.listaPerfil}" tableStyle="table-layout:auto" rowKey="#{model.id}"
+                                     currentPageReportTemplate="{currentPage} de {totalPages}">
+
+                            <f:facet name="header">
+                                <p:inputText id="globalFilter" onkeyup="PF('modelPerfil').filter()" placeholder="Filtrar"/>
+                            </f:facet>
+
+                            <p:column headerText="Nome" filterBy="#{model.nome}" filterMatchMode="contains" sortBy="#{model.nome}">
+                                <h:outputText class="reflowx" value="#{model.nome}"/>
+                            </p:column>
+
+                            <p:column headerText="Ativo" styleClass="centralizar" width="100">
+                                <h:outputText value="#{model.flAtivo==true?'Sim':'Não'}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Opções" width="90" class="centralizar">
+                                <p:menuButton value="" >
+                                    <p:menuitem value="Editar" styleClass="editar" icon="fa fa-pencil-square-o"
+                                                action="#{perfilBean.gotoPerfilEdit(model.id)}" 
+                                                title="Editar dados do perfil."/>
+                                    
+                                    <p:menuitem value="Excluir" icon="fa fa-trash" 
+                                                oncomplete="PF('confirmarExcluir').show()" process="@this"
+                                                update=":frmPerfilView" title="Excluir perfil.">   
+                                            <f:setPropertyActionListener value="#{model}" target="#{perfilBean.perfil}"/>
+                                    </p:menuitem>
+
+                                </p:menuButton>
+                            </p:column>
+                            
+                        </p:dataTable>
+
+                        <p:confirmDialog
+                            message="Tem certeza que deseja excluir este Perfil? Essa operação não poderá ser desfeita."
+                            responsive="true" header="Excluir Perfil" widgetVar="confirmarExcluir">
+                            <p:commandButton value="Confirmar" oncomplete="PF('confirmarExcluir').hide()" icon="fa fa-check"
+                                             actionListener="#{perfilBean.delete}" update=":frmPerfilView:dataTablePerfil"/>
+                            <p:commandButton value="Cancelar" onclick="PF('confirmarExcluir').hide(); return false;"
+                                             icon="ui-icon-highlight-off" ajax="false"/>
+                        </p:confirmDialog>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,198 @@
+// ================== PRIMEIRO ACESSO
+
+.acesso-body {
+    font-size: 14px;
+    line-height: 18px;
+
+    background: linear-gradient(182deg, #36609b, #ffffff);
+    background-size: 100% 230%;
+}
+
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-areas: "left right";
+
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    min-height: 66vh;
+    box-shadow: 0 0.18rem 2rem rgba(0, 0, 0, 0.12), 0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
+    border-radius: .4rem;
+
+    margin-left: 16.66666667%;
+    width: 66.66666667%;
+}
+
+.grid-wrapper.smaller {
+    min-height: 30vh;
+}
+
+
+.grid-left {
+    grid-area: left;
+    background-color: #f5f7f8;
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: 4px 0 0 4px;
+}
+
+.left-content {
+    align-self: center;
+    justify-self: center;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-gap: 10px;
+}
+
+.grid-wrapper .logo {
+    width: 60%;
+}
+
+.grid-wrapper .title {
+    font-size: 22px;
+    color: #78909c;
+    font-size: 19px !important;
+}
+
+.grid-right {
+    grid-area: right;
+    background-color: #ffffff;
+    padding: 15px;
+    line-height: 45px;
+    border-radius: 0 4px 4px 0;
+
+    display: grid;
+}
+
+.grid-right .first-right {
+    min-height: 56vh;
+}
+
+.grid-right .grid-title {
+    text-align: center;
+    color: #78909c;
+    margin: 0 0 15px 0;
+}
+
+@media (max-width: 1040px) {
+    .grid-wrapper {
+        margin-left: 8.33333333%;
+        width: 83.33333333%;
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-wrapper {
+        grid-template-columns: 1fr;
+        grid-template-areas: "left" "right";
+    }
+    .left-content {
+        padding: 20px;
+    }
+
+    .grid-left {
+        border-radius: 4px 4px 0 0;
+    }
+
+    .grid-right {
+        border-radius: 0 0 4px 4px;
+    }
+}
+
+@media (max-width: 636px) {
+    .grid-wrapper {
+        margin: 1.6rem 15px;
+        width: auto;
+    }
+
+    #g-recaptcha {
+        transform: scale(0.77);
+        -webkit-transform: scale(0.77);
+        transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+    }
+
+    #g-recaptcha > div {
+        width: 200px !important;
+    }
+}
+
+.grid-right-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    align-self: end;
+}
+
+.grid-wrapper .ui-inputfield {
+    //border-color: #78909c;
+}
+
+.flat-button {
+    background-color: transparent !important;
+    color: #78909c !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 1rem !important;
+    font-weight: 900 !important;
+    margin-left: 10px;
+}
+
+.flat-button .ui-icon {
+    color: #78909c !important;
+}
+
+.acesso-body .ui-outputlabel-rfi {
+    display: none;
+}
+
+.acesso-body .md-inputfield label {
+    margin-top: -5px;
+}
+
+.ui-dialog-content {
+    max-width: 950px !important;
+    max-height: 700px !important;
+    margin-bottom: 5px !important;
+}
+
+
+.acesso-body .ui-growl-item-container {
+    background-color: rgba(0, 0, 0, 0.62) !important;
+}
+
+@media (max-width: 768px) {
+    .acesso-body .ui-growl-item-container {
+        background-color: rgba(5, 95, 145, 0.79) !important;
+    }
+}
+
+.acesso-title-group {
+    display: block;
+}
+.acesso-title-group .acesso-title {
+    font-size: 1.5em;
+    text-align: center;
+    color: #78909c;
+    margin: 0 0 15px 0;
+    font-weight: bold;
+}
+
+.acesso-title-group .flat-button {
+    margin-left: 0;
+}
+
+body .ui-widget-content{
+    font-size: 14px !important;
+}
+
+/* Classe para agrupar um input com botão de ação a sua direita */
+.input-group-action *:nth-child(1) {
+    display: inline-table;
+}
+
+body .ui-selectonemenu .ui-selectonemenu-trigger{
+    margin-top: -4px;
+}

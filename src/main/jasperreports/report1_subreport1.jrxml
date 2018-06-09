@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="96057d7f-4d14-4bdd-884a-7105587eeb67">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     comissao."id" AS comissao_id,
+     comissao."num_func_eleito" AS comissao_num_func_eleito,
+     comissao."num_vinc_eleito" AS comissao_num_vinc_eleito,
+     comissao."descricao" AS comissao_descricao,
+     membro_comissao."id" AS membro_comissao_id,
+     membro_comissao."comissao_id" AS membro_comissao_comissao_id,
+     membro_comissao."membro_id" AS membro_comissao_membro_id,
+     membro_comissao."dt_cadastro" AS membro_comissao_dt_cadastro,
+     membro_comissao."dt_excluido" AS membro_comissao_dt_excluido,
+     membro_comissao."chefe" AS membro_comissao_chefe,
+     membro_comissao."excluido" AS membro_comissao_excluido,
+     membro_comissao."ativo" AS membro_comissao_ativo,
+     membro."nome" AS membro_nome,
+     membro."cpf" AS membro_cpf,
+     membro."sigla_orgao" AS membro_sigla_orgao,
+     membro."setor" AS membro_setor,
+     membro."nome_cargo" AS membro_nome_cargo,
+     membro."chefe_imediato" AS membro_chefe_imediato,
+     membro."id" AS membro_id
+FROM
+	"aede"."avaliacao" avaliacao
+     INNER JOIN "aede"."comissao" comissao ON comissao.num_func_eleito = avaliacao.num_func AND comissao.num_vinc_eleito = avaliacao.num_vinc
+     INNER JOIN "aede"."membro_comissao" membro_comissao ON comissao."id" = membro_comissao."comissao_id"
+     INNER JOIN "aede"."membro" membro ON membro."id" = membro_comissao."membro_id"]]>
+	</queryString>
+	<field name="comissao_id" class="java.lang.Integer"/>
+	<field name="comissao_num_func_eleito" class="java.math.BigDecimal"/>
+	<field name="comissao_num_vinc_eleito" class="java.math.BigDecimal"/>
+	<field name="comissao_descricao" class="java.lang.String"/>
+	<field name="membro_comissao_id" class="java.lang.Integer"/>
+	<field name="membro_comissao_comissao_id" class="java.lang.Integer"/>
+	<field name="membro_comissao_membro_id" class="java.lang.Integer"/>
+	<field name="membro_comissao_dt_cadastro" class="java.sql.Date"/>
+	<field name="membro_comissao_dt_excluido" class="java.sql.Date"/>
+	<field name="membro_comissao_chefe" class="java.lang.Boolean"/>
+	<field name="membro_comissao_excluido" class="java.lang.Boolean"/>
+	<field name="membro_comissao_ativo" class="java.lang.Boolean"/>
+	<field name="membro_nome" class="java.lang.String"/>
+	<field name="membro_cpf" class="java.lang.String"/>
+	<field name="membro_sigla_orgao" class="java.lang.String"/>
+	<field name="membro_setor" class="java.lang.String"/>
+	<field name="membro_nome_cargo" class="java.lang.String"/>
+	<field name="membro_chefe_imediato" class="java.lang.Boolean"/>
+	<field name="membro_id" class="java.lang.Integer"/>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="16" width="100" height="20" uuid="5380e558-27f1-4fa4-a2e8-dfca13248dc2"/>
+				<text><![CDATA[COMISSÃO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="16" width="100" height="20" uuid="433cd11d-d3f0-4d0a-8bcc-532f1bdf7335"/>
+				<text><![CDATA[Nome do membro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="16" width="100" height="20" uuid="aef8921e-f9cc-4375-8c3f-56b3d67310ad"/>
+				<text><![CDATA[Orgão:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="398" y="16" width="100" height="20" uuid="129f3d42-68f6-46b3-9dd2-202dac977880"/>
+				<text><![CDATA[Cargo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="88" splitType="Stretch">
+			<textField>
+				<reportElement x="13" y="14" width="176" height="20" uuid="d0a45795-5568-4f1e-96a7-5a3887885ded"/>
+				<textFieldExpression><![CDATA[$F{membro_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="215" y="14" width="100" height="20" uuid="51f88d36-feb6-46fa-989f-3da747590358"/>
+				<textFieldExpression><![CDATA[$F{membro_sigla_orgao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="398" y="14" width="100" height="20" uuid="4a5901ea-d76c-4dbc-88b7-ba7fdba8900a"/>
+				<textFieldExpression><![CDATA[$F{membro_nome_cargo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

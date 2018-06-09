@@ -1,0 +1,94 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/index.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+            <p:breadCrumb>
+                <p:menuitem value="Home" url="/index.xhtml"/>
+                <p:menuitem value="Gerenciar Usuários" url=""/>
+            </p:breadCrumb>
+        </h:form>
+        
+        <h:form id="frmUsuarioView">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card card-w-title">
+                    <h1>Gerenciar Usuários</h1>
+                    <p:messages id="messages" autoUpdate="true" closable="true"  />
+                    
+                    <p:commandButton id="btn_novo" value="Adicionar" action="#{usuarioBean.gotoUsuarioNew}" icon="ui-icon-add" />
+                   
+                    <br/>
+                    <br/>
+
+                    <p:dataTable id="dataTableUsuario" paginator="true" rows="30" widgetVar="modelUsuario"
+                                 paginatorAlwaysVisible="false" styleClass="reflowTable" lazy="true"
+                                 emptyMessage="Nenhum registro encontrado." var="model" reflow="true"
+                                 value="#{usuarioBean.listaUsuarios}" tableStyle="table-layout:auto" rowKey="#{model.id}"
+                                 currentPageReportTemplate="{currentPage} de {totalPages}">
+                        
+                        <f:facet name="header">
+                            <p:inputText id="globalFilter" onkeyup="PF('modelUsuario').filter()" placeholder="Filtrar"/>
+                        </f:facet>
+                        
+                        <p:column width="100" headerText="Perfis">
+                            <p:rowToggler/>
+                        </p:column>
+
+                        <p:column headerText="Nome" filterBy="#{model.pessoa.nome}" filterMatchMode="contains" sortBy="#{model.pessoa.nome}">
+                            <h:outputText class="reflowx" value="#{model.pessoa.nome}"/>
+                        </p:column>
+
+                        <p:column headerText="CPF" filterBy="#{model.pessoa.cpf}" filterMatchMode="contains" class="centralizar" sortBy="#{model.pessoa.cpf}">
+                            <h:outputText class="reflowx" value="#{model.pessoa.cpfFormatado}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Lotação" filterBy="#{model.pessoa.lotacao}" filterMatchMode="contains" class="centralizar" sortBy="#{model.pessoa.lotacao}">
+                            <h:outputText class="reflowx" value="#{model.pessoa.lotacao}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Ativar" class="centralizar">
+                            <p:selectBooleanCheckbox id="ativo" value="#{model.ativo}" >
+                                <p:ajax listener="#{usuarioBean.mudarSituacao(model)}" />
+                            </p:selectBooleanCheckbox>
+                        </p:column>
+                        
+                        <p:column headerText="Opções" width="90" class="centralizar">
+                                <p:menuButton value="" >
+                                    <p:menuitem value="Editar" styleClass="editar" icon="fa fa-pencil-square-o"
+                                                action="#{usuarioBean.gotoUsuarioEdit(model.id)}" 
+                                                title="Editar dados do usuário."/>
+                                    
+                                    <p:menuitem value="Excluir" icon="fa fa-trash"
+                                                oncomplete="PF('confirmarExcluir').show()" process="@this"
+                                                title="Excluir usuário.">   
+                                        <f:setPropertyActionListener value="#{model}" target="#{usuarioBean.usuario}"/>
+                                    </p:menuitem>
+
+                                </p:menuButton>
+                            </p:column>
+                        
+                        <p:rowExpansion>
+                            <p:dataTable value="#{model.listaPerfis}" paginator="true" rows="5" widgetVar="modelPerfil"
+                                 paginatorAlwaysVisible="false" emptyMessage="Nenhum registro encontrado." var="perfil">
+                                <p:column headerText="Perfis">
+                                    <h:outputText class="reflowx" value="#{perfil.nome} - #{perfil.flAtivo==true?'Ativo':'Inativo'} "/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:rowExpansion>
+                    </p:dataTable>
+                    
+                    <p:confirmDialog id="confirmaExclusaoMenu" message="Tem certeza que deseja excluir este usuário? Essa operação não poderá ser desfeita." responsive="true" header="Excluir Usuário" widgetVar="confirmarExcluir">
+                        <p:commandButton value="Confirmar" oncomplete="PF('confirmarExcluir').hide()" icon="fa fa-check" actionListener="#{usuarioBean.delete}" update=":frmUsuarioView"/>
+                        <p:commandButton value="Cancelar" onclick="PF('confirmarExcluir').hide(); return false;" icon="ui-icon-highlight-off" ajax="false"/>
+                    </p:confirmDialog>
+                </div>
+            </div>
+        </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

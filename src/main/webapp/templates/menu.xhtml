@@ -1,0 +1,18 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pu="http://primefaces.org/ultima">
+
+    <h:form id="menuform" prependId="false">
+        <div class="layout-menu #{ultimaPreferences.menuClass}">
+            <div class="nano">
+                <div class="nano-content menu-scroll-content">
+                    <p:remoteCommand name="rc" update="menu" ignoreAutoUpdate="true"/>
+                    <pu:menu id="menu" widgetVar="me" model="#{menuView.model}"/>
+                </div>
+            </div>
+        </div>
+    </h:form>
+</ui:composition>

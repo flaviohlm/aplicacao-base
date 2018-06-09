@@ -1,0 +1,94 @@
+# Configurações gerais da aplicação
+application:
+  name: Sistema de Gestão de Seleção
+  version: 1.0
+
+# Siga Unicet
+dbUnicet:
+  driverClassName: org.postgresql.Driver
+  username: sigef_user
+  password: sigef_user
+
+# Configurações Eclipselink
+eclipselink:
+  dialect: org.springframework.orm.jpa.vendor.EclipseLinkJpaDialect
+  weaving-lazy: true
+  weaving: false
+  cache-shared-default: false
+
+# Configurações do Hibernate
+hibernate:
+  enable-lazy-load-no-trans: true
+
+# Pool de Conexão
+pool:
+  validationQuery: SELECT 1 # Query de validação da conexão
+  validationQueryTimeout: 30 # Tempo máximo (segundos) para gerar timeout da 'validationQuery'
+  maxWaitMillis: 10000 # Tempo máximo (milisegundos) de espera por uma nova conexão, caso nenhuma esteja disponível no pool
+  defaultQueryTimeout: 60 # Tempo máximo (segundos) de espera pelo retorno de uma query
+  removeAbandonedTimeout: 30 # Tempo máximo (segundos) para remover uma conexão abandonada
+
+# Configurações das API Restful
+rest:
+  hashKey: 775818b02ec3057a179d17a49a529cd9ff389fbe24b0869ac14367e68c9a5566 # Hash da API
+  authUrl: http://desenvolvimento.secad.to.gov.br/api-auth # URL da API de Autenticação
+  servicesUrl: http://desenvolvimento.secad.to.gov.br/api-services # URL da API de Serviços
+
+--- #  Perfil de Default
+spring:
+  profiles: default
+
+dbUnicet:
+  url: jdbc:postgresql://10.121.1.61:5433/bcoproducao
+
+eclipselink:
+  logging-level: WARNING
+
+pool:
+  maxTotal: -1 # Máximo total de conexões
+  initialSize: -1 # Quantidade de conexões abertas de início
+  maxIdle: -1 # Máximo de conexões ociosas
+  minIdle: -1 # Mínimo de conexões ociosas
+
+
+--- # Perfil de para testar bancos de Produção
+spring:
+  profiles: test-prod
+
+dbUnicet:
+  url: jdbc:postgresql://10.121.0.19:5433/bcoproducao
+
+eclipselink:
+  logging-level: SEVERE
+
+#Desabilitando pool neste perfil
+pool:
+  maxTotal: -1 # Quantidade máxima total de conexões
+  initialSize: -1 # Quantidade de conexões abertas de início
+  maxIdle: -1 # Quantidade máxima de conexões ociosas
+  minIdle: -1 # Quantidade mínima de conexões ociosas
+
+rest:
+  authUrl: http://sistemas.secad.to.gov.br/api-authh
+  servicesUrl: http://sistemas.secad.to.gov.br/api-services
+
+
+--- # Perfil de Produção
+spring:
+  profiles: deploy-prod
+
+dbUnicet:
+  url: jdbc:postgresql://10.121.0.19:5433/bcoproducao
+
+eclipselink:
+  logging-level: SEVERE
+
+pool:
+  maxTotal: 200 # Quantidade máxima total de conexões
+  initialSize: 20 # Quantidade de conexões abertas de início
+  maxIdle: 100 # Quantidade máxima de conexões ociosas
+  minIdle: 20 # Quantidade mínima de conexões ociosas
+
+rest:
+  authUrl: http://sistemas.secad.to.gov.br/api-authh
+  servicesUrl: http://sistemas.secad.to.gov.br/api-services
